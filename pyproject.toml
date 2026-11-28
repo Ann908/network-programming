@@ -1,0 +1,12 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"
+
+[tool.coverage.run]
+source = ["lab3_v2"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+precision = 2

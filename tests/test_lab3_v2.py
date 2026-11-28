@@ -218,6 +218,12 @@ def test_items_rejects_request_without_valid_credentials(client, request_options
     assert response.status_code == 401
     assert response.get_json() == {"error": "Unauthorized access"}
 
+def test_health():
+    response = app.test_client().get("/health")
+
+    assert response.status_code == 200
+    assert response.get_json() == {"status": "ok"}
+
 #For run in the terminal
 #$env:PRODUCTS_DATABASE_URI = "sqlite:///:memory:"
 #python -m pytest test_lab3_v2.py --cov=lab3_v2 --cov-report=term-missing --cov-report=html --cov-fail-under=85

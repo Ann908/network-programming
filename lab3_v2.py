@@ -183,6 +183,10 @@ def get_products(product_id):
     db.session.commit()
     return jsonify({'message': 'Product is deleted'})
 
+@app.get("/health")
+def health():
+    return jsonify(status="ok")
+
 if __name__ == '__main__':
     initialized_db()
     app.run(debug=True)

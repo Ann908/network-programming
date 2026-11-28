@@ -1,0 +1,6 @@
+Flask>=3.1,<4
+Flask-HTTPAuth>=4.8,<5
+Flask-SQLAlchemy>=3.1,<4
+SQLAlchemy>=2.0,<3
+Werkzeug>=3.1,<4
+gunicorn>=23,<27
