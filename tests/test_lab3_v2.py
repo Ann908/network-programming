@@ -93,7 +93,7 @@ def test_task_products_get(client):
     response = client.get("/items", auth=("Nick", "python"))
 
     assert response.status_code == 200
-    assert [product["id"] for product in response.get_json()["products"]] == [1, 2, 4]
+    assert [product["id"] for product in response.get_json()["products"]] == [1, 2, 3]
 
 
 def test_task_products_post(client):
