@@ -187,6 +187,31 @@ def get_products(product_id):
 def health():
     return jsonify(status="ok")
 
+@app.get("/api/stats")
+def stats():
+    values = request.args.getlist("v", type=float)
+    if not values:
+        return jsonify(error="Don't have values"), 400
+
+    count = len(values)
+    mean = sum(values) / count
+    minimum = min(values)
+    maximum = max(values)
+
+    if count > 1:
+        squared_deviations = [(value - mean) ** 2 for value in values]
+        variance = sum(squared_deviations) / (count - 1)
+    else:
+        variance = 0.0
+
+    return jsonify(
+        count=count,
+        mean=mean,
+        min=minimum,
+        max=maximum,
+        variance=variance,
+    )
+
 if __name__ == '__main__':
     initialized_db()
     app.run(debug=True)
