@@ -224,6 +224,28 @@ def test_health():
     assert response.status_code == 200
     assert response.get_json() == {"status": "ok"}
 
+@pytest.mark.parametrize(
+    "query, expected_status, expected_body",
+    [
+        ("", 400, {"error": "Немає значень"}),
+        (
+            "v=4",
+            200,
+            {"count": 1, "mean": 4.0, "min": 4.0, "max": 4.0, "variance": 0.0},
+        ),
+        (
+            "v=2&v=4",
+            200,
+            {"count": 2, "mean": 3.0, "min": 2.0, "max": 4.0, "variance": 2.0},
+        ),
+    ],
+)
+def test_stats(query, expected_status, expected_body):
+    response = app.test_client().get("/api/stats", query_string=query)
+
+    assert response.status_code == expected_status
+    assert response.get_json() == expected_body
+
 #For run in the terminal
 #$env:PRODUCTS_DATABASE_URI = "sqlite:///:memory:"
 #python -m pytest test_lab3_v2.py --cov=lab3_v2 --cov-report=term-missing --cov-report=html --cov-fail-under=85
