@@ -227,7 +227,7 @@ def test_health():
 @pytest.mark.parametrize(
     "query, expected_status, expected_body",
     [
-        ("", 400, {"error": "Немає значень"}),
+        ("", 400, {"error": "Don't have values"}),
         (
             "v=4",
             200,
